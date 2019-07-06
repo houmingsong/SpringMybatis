@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lovo.dao.IMessageDao">
+	<resultMap id="MessageRM" type="messageEntity">
+		<id property="id" column="id" />
+		<result property="studentName" column="studentName" />
+		<result property="sex" column="sex" />
+		<result property="birthday" column="birthday" />
+		<result property="classNameId" column="classNameId" />
+		<result property="address" column="address" />
+		<result property="scondition" column="scondition" />
+		<result property="tel" column="tel" />
+		<result property="fatherName" column="fatherName" />
+		<result property="fatherTel" column="fatherTel" />
+		<result property="motherName" column="motherName" />
+		<result property="motherTel" column="motherTel" />
+		<result property="scomment" column="scomment" />
+	</resultMap>
+	
+	
+	<resultMap id="MesRM" type="mesEntity">
+		<id property="id" column="id" />
+		<result property="message" column="message" />
+	</resultMap>
+
+	<select id="show" resultMap="MessageRM">
+		select * from t_student limit #{param1},4
+	</select>
+	
+	<select id="getTotalPage" resultType="int">
+		select count(*) from t_student
+	</select>
+	
+	<select id="show1" resultMap="MesRM">
+		select * from t_message where id=#{param1}
+	</select>
+	
+	<select id="show2" resultMap="MessageRM">
+		select * from t_student
+	</select>
+	
+	<select id="QueryAllUsers" resultMap="MessageRM">
+		select * from t_student 
+	</select>
+	
+	
+	<select id="select" parameterType="messageEntity" resultMap="MessageRM">
+		select * from t_student where sex=#{param1} and scondition=#{param2}
+	</select>
+	
+	
+</mapper>

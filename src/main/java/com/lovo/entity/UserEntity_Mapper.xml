@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lovo.dao.IUserDao">
+	
+	<resultMap id="userRM" type="userEntity">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+	</resultMap>
+
+	<select id="login" parameterType="userEntity" resultMap="userRM">
+		select * from t_user where username=#{param1} and password=#{param2}
+	</select>
+	
+	<select id="addUser" parameterType="userEntity">
+		insert into t_user values(#{id},#{username},#{password})
+	</select>
+		
+	<select id="delUser" parameterType="userEntity">
+		delete from t_user where id=#{id}
+	</select>
+	
+	<select id="show3" resultMap="userRM">
+		select * from t_user limit #{param1},4
+	</select>
+	
+	<select id="getTotalPage" resultType="int">
+		select count(*) from t_user
+	</select>
+	
+	<update id="update">
+		 update t_user set password=#{arg0} where id=#{arg1}
+	</update>
+	
+	<select id="queryAlluserName" resultMap="userRM">
+		select username from t_user
+	</select>
+</mapper>
